@@ -9,6 +9,7 @@ import LOBDetails from './lob.details';
 import ActivityLog from './activitylog';
 import Report from './Report';
 import Designation from './designation';
+import Dashboarddetails from './dashboarddetails';
 
 const MainContainer = styled(Box)(({ theme }) => ({
   width: 'calc(100% - 250px)', // Adjusted width to fit with Sidebar
@@ -21,7 +22,7 @@ const MainContainer = styled(Box)(({ theme }) => ({
     width: '100%',
     margin: 'unset',
     padding: theme.spacing(4, 2),
-     // Same adjustment for mobile
+     
     marginLeft: 0, // Remove margin for smaller screens
   },
 }));
@@ -42,6 +43,7 @@ const Dashboard = () => {
         <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
         <MainContainer>
           <Routes>
+          <Route path="dashboarddetails" element={<Dashboarddetails />} />
             <Route path="details/:employeeCode" element={<EmployeeDetails />} />
             <Route path="employee" element={<Employee />} />
             <Route path="lob" element={<LOBDetails />} />

@@ -7,7 +7,7 @@ import { FakeServer } from './fakeServer';
 import { ColumnsToolPanelModule } from '@ag-grid-enterprise/column-tool-panel';
 import { MenuModule } from '@ag-grid-enterprise/menu';
 import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-model';
-import { Box, Typography, Button, TextField, MenuItem } from '@mui/material';
+import { Typography, Button, TextField, MenuItem, Box, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -33,7 +33,7 @@ const Employee = () => {
     };
 
     return (
-      <Button size="small" startIcon={<VisibilityIcon />} onClick={handleClick}></Button>
+      <Button size="small" sx={{minWidth:'unset'}}startIcon={<VisibilityIcon />} onClick={handleClick}></Button>
     );
   };
 
@@ -129,68 +129,69 @@ const Employee = () => {
     <Box>
       <Typography variant="h4">Employee</Typography>
       <Box display="flex" flexDirection="column" gap={2} sx={{ marginTop: 2, marginLeft: 3, marginRight: 3 }}>
-        <Box display="flex" flexDirection="row" gap={2}>
-          <TextField
-            select
-            variant="outlined"
-            size="small"
-            value={exemptionFilter}
-            onChange={handleExemptionChange}
-            sx={{ width: 200 }}
-          >
-            <MenuItem value="All">All</MenuItem>
-            <MenuItem value="Exemption">Exemption</MenuItem>
-          </TextField>
-          <TextField
-            label="Search by Employee Name/Code"
-            variant="outlined"
-            size="small"
-            value={searchText}
-            onChange={handleSearchChange}
-            sx={{ width: 550 }}
-          />
-        
-        <Box display="flex" flexDirection="row" gap={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<DownloadIcon />}
-            size="small"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#89CFF0',
-              },
-              '&:active': {
-                backgroundColor: '#89CFF0',
-              },
-            }}
-          >
-            <Typography variant="body2" sx={{ color: 'white' }}>
+        <Grid container spacing={2} justifyContent="space-between">
+          <Grid item xs={12} sm={6} lg={2}>
+            <TextField
+              select
+              variant="outlined"
+              size="small"
+              value={exemptionFilter}
+              onChange={handleExemptionChange}
+              sx={{ width: { xs: '100%', sm: '100%' } }}
+            >
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Exemption">Exemption</MenuItem>
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={6}>
+            <TextField
+              label="Search by Employee Name/Code"
+              variant="outlined"
+              size="small"
+              value={searchText}
+              onChange={handleSearchChange}
+              sx={{ width: { xs: '100%', sm: '100%' } }}
+            />
+          </Grid>
+          <Grid item xs={6} sm={4} lg={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<DownloadIcon />}
+              size="small"
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#89CFF0',
+                },
+                '&:active': {
+                  backgroundColor: '#89CFF0',
+                },
+              }}
+            >
               Download Employees
-            </Typography>
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CloudUploadIcon />}
-            component="label"
-            size="small"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#89CFF0',
-              },
-              '&:active': {
-                backgroundColor: '#89CFF0',
-              },
-            }}
-          >
-            <Typography variant="body2" sx={{ color: 'white' }}>
+            </Button>
+          </Grid>
+          <Grid item xs={6} sm={4} lg={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<CloudUploadIcon />}
+              component="label"
+              size="small"
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#89CFF0',
+                },
+                '&:active': {
+                  backgroundColor: '#89CFF0',
+                },
+              }}
+            >
               Upload Employees
-            </Typography>
-            <input type="file" hidden />
-          </Button>
-        </Box>
-        </Box>
+              <input type="file" hidden />
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
       <Box className="ag-theme-alpine" sx={{ "& .ag-paging-panel": { flexWrap: 'wrap', fontSize: '10px', }, height: 600, width: '100%', marginTop: '20px', }}>
         <AgGridReact

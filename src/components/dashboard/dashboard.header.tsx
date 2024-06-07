@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Stack, Menu, MenuItem, IconButton } from '@mui/material';
 import Person2Icon from '@mui/icons-material/Person2';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import logo from '../assets/kfintech-logo.png';
 const DashboardHeader = ({ onMenuClick }:{onMenuClick:(val:boolean)=>void}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -35,16 +35,29 @@ const DashboardHeader = ({ onMenuClick }:{onMenuClick:(val:boolean)=>void}) => {
     >
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenuClick} sx={{ display: { sm: 'none' } }}>
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenuClick} sx={{ display: { md: 'none' } }}>
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h4" color="primary" align="left">
-            <img
-              src="https://www.newsexperts.in/wp-content/uploads/2022/01/LOGO.jpg"
-              alt="KFINTECH Logo"
-              style={{ maxWidth: '15%', marginTop: '0px' }}
-            />
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src={logo}
+            alt="KFINTECH Logo"
+            sx={{
+              maxWidth: { xs: '80px', sm: '100px', md: '150px' },
+              height: 'auto',
+            }}
+          />
+          <Typography
+            component="h1"
+            variant="h5"
+            color="#2f5ea8"
+            align="left"
+            sx={{ marginLeft: '36px', fontWeight: 'bold' }}
+          >
+            NISM Automation
           </Typography>
+        </Box>
         </Box>
         <Box
           onClick={handleProfileClick}

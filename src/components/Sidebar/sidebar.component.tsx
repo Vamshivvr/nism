@@ -5,6 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import WorkspacesSharpIcon from '@mui/icons-material/WorkspacesSharp';
 import HistoryIcon from '@mui/icons-material/History';
 import DescriptionIcon from '@mui/icons-material/Description';
+import HomeIcon from '@mui/icons-material/Home';
 import { useTheme } from '@mui/material/styles';
 
 const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
@@ -13,6 +14,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   const navItems = [
+    {label: 'Dashboard', icon: <HomeIcon />, path: '/dashboard/dashboarddetails'},
     { label: 'Employee', icon: <PersonIcon />, path: '/dashboard/employee' },
     { label: 'LOB', icon: <WorkspacesSharpIcon />, path: '/dashboard/lob' },
     {

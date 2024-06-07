@@ -21,6 +21,7 @@ const Report: React.FC = () => {
   const [pendingDuration, setPendingDuration] = useState('');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
   const handleReportClick = (report: ReportType) => {
     setSelectedReport(report);
@@ -74,7 +75,7 @@ const Report: React.FC = () => {
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        height="100%"
+        height={isLargeScreen ? 'calc(100vh - 30vh)' : 'auto'}
       >
         <Box p={2}>
           <Typography variant="h6">{reportTitle}</Typography>
@@ -108,79 +109,148 @@ const Report: React.FC = () => {
   };
 
   return (
+    <Box>
+      <Box><Typography variant="h4" align="left" fontWeight="bold" mb={2} marginLeft={2}>
+        Reports
+      </Typography>
+      </Box>
+    
     <Box
       display="flex"
-      flexDirection={isMobile ? 'column' : 'row'}
-      height={isMobile ? 'auto' : 'calc(100vh - 32px)'}
-      width={isMobile ? '100%' : 'calc(80vw - 32px)'}
+      flexDirection="column"
       bgcolor="white"
       p={2}
       m={2}
       borderRadius={2}
       boxShadow={3}
-      sx={{ marginLeft: isMobile ? 0 : '16px' ,}}
+      height={isMobile ? 'auto' : 'calc(100vh - 20vh)'}
     >
-      {isMobile ? (
-        <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Select Report</InputLabel>
-          <Select
-            value={selectedReport}
-            onChange={(event) => handleReportClick(event.target.value as ReportType)}
-            label="Select Report"
-          >
-            <MenuItem value={'enrollment'}>Enrollment Report</MenuItem>
-            <MenuItem value={'deactivation'}>Deactivation Report</MenuItem>
-            <MenuItem value={'pending'}>Employee Pending Report</MenuItem>
-            <MenuItem value={'reimbursement'}>Reimbursement Report</MenuItem>
-          </Select>
-        </FormControl>
-      ) : (
-        <Box width="30%" p={2} display="flex" flexDirection="column" bgcolor="white">
-          <Button
-            fullWidth
-            onClick={() => handleReportClick('enrollment')}
-            sx={{ marginBottom: 1 }}
-          >
-            Enrollment Report
-          </Button>
-          <Button
-            fullWidth
-            onClick={() => handleReportClick('deactivation')}
-            sx={{ marginBottom: 1 }}
-          >
-            Deactivation Report
-          </Button>
-          <Button
-            fullWidth
-            onClick={() => handleReportClick('pending')}
-            sx={{ marginBottom: 1 }}
-          >
-            Employee Pending Report
-          </Button>
-          <Button
-            fullWidth
-            onClick={() => handleReportClick('reimbursement')}
-            sx={{ marginBottom: 1 }}
-          >
-            Reimbursement Report
-          </Button>
-        </Box>
-      )}
-      {!isMobile && <Divider orientation="vertical" flexItem />}
+      
       <Box
-        width={isMobile ? '100%' : '70%'}
-        pl={isMobile ? 0 : 2}
-        borderRadius={2}
-        boxShadow={1}
-        sx={{ marginLeft: isMobile ? 0 : '16px' }}
+        display="flex"
+        flexDirection={isMobile ? 'column' : 'row'}
+        height={isMobile ? 'auto' : 'calc(100vh - 25vh)'}
+        width="100%"
       >
-        <Paper
-          elevation={0}
-          sx={{ padding: 2, height: '100%', backgroundColor: 'white', borderRadius: 2 }}
+        {isMobile ? (
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>Select Report</InputLabel>
+            <Select
+              value={selectedReport}
+              onChange={(event) => handleReportClick(event.target.value as ReportType)}
+              label="Select Report"
+            >
+              <MenuItem value={'Leaderboard'}>Leaderboard Report</MenuItem>
+              <MenuItem value={'Not Certified greaterthan 3 months'}>Not Certified (&gt; 3 months)</MenuItem>
+              <MenuItem value={'Awaiting Enrolment'}>Awaiting Enrolment(&gt; 3 months)</MenuItem>
+              <MenuItem value={'Enrolled Yet to be certified'}>Enrolled,Yet to be certified</MenuItem>
+              <MenuItem value={'Certificate Expired'}>Certificate Expired</MenuItem>
+              <MenuItem value={'deactivation'}>Deactivation Report</MenuItem>
+              <MenuItem value={'Reactivation'}>Reactivation Report</MenuItem>
+              <MenuItem value={'Reactivation'}>Reactivation Report</MenuItem>
+              <MenuItem value={'Exemption'}>Exemption Report</MenuItem>
+              
+              <MenuItem value={'pending'}>Employee Pending Report</MenuItem>
+              <MenuItem value={'reimbursement'}>Reimbursement Report</MenuItem>
+            </Select>
+          </FormControl>
+        ) : (
+          <Box width="30%" p={2} display="flex" flexDirection="column" bgcolor="white" 
+          sx={{
+            "& .MuiButton-root":{
+              "justifyContent":'flex-start'
+            }
+          }}
+          >
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Leaderboard')}
+              sx={{ marginBottom: 1 }}
+            >
+              Leaderboard Report
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Not Certified greaterthan 3 months')}
+              sx={{ marginBottom: 1 }}
+            >
+              Not Certified (&gt; 3 months)
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Awaiting Enrolment')}
+              sx={{ marginBottom: 1 }}
+            >
+              Awaiting Enrolment(&gt; 3 months)
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Enrolled Yet to be certified')}
+              sx={{ marginBottom: 1 }}
+            >
+              Enrolled,Yet to be certified
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Certificate Expired')}
+              sx={{ marginBottom: 1 }}
+            >
+              Certificate Expired
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('deactivation')}
+              sx={{ marginBottom: 1 }}
+            >
+              Deactivation Report
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Reactivation')}
+              sx={{ marginBottom: 1 }}
+            >
+              Reactivation Report
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('Exemption')}
+              sx={{ marginBottom: 1 }}
+            >
+              Exemption Report
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('pending')}
+              sx={{ marginBottom: 1 }}
+            >
+              Employee Pending Report
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => handleReportClick('reimbursement')}
+              sx={{ marginBottom: 1 }}
+            >
+              Reimbursement Report
+            </Button>
+          </Box>
+        )}
+        {!isMobile && <Divider orientation="vertical" flexItem />}
+        <Box
+          width={isMobile ? '100%' : '70%'}
+          pl={isMobile ? 0 : 2}
+          borderRadius={2}
+          boxShadow={1}
+          sx={{ marginLeft: isMobile ? 0 : '16px' }}
         >
-          {renderReportContent()}
-        </Paper>
+          <Paper
+            elevation={0}
+            sx={{ padding: 2, height: '100%', backgroundColor: 'white', borderRadius: 2 }}
+          >
+            {renderReportContent()}
+          </Paper>
+        </Box>
       </Box>
+    </Box>
     </Box>
   );
 };
